@@ -1,23 +1,28 @@
 import Vue from 'vue'
 import Router from 'vue-router'
+import City from './views/City.vue'
+import Cinema from './views/Cinema.vue'
 import Home from './views/Home.vue'
 
 Vue.use(Router)
 
 export default new Router({
+  mode: 'history',
   routes: [
     {
       path: '/',
-      name: 'home',
-      component: Home
+      name: 'city',
+      component: City
     },
     {
-      path: '/about',
-      name: 'about',
-      // route level code-splitting
-      // this generates a separate chunk (about.[hash].js) for this route
-      // which is lazy-loaded when the route is visited.
-      component: () => import(/* webpackChunkName: "about" */ './views/About.vue')
+      path: '/cinema',
+      name: 'cinema',
+      component: Cinema
+    },
+    {
+      path: '/home',
+      name: 'home',
+      component: Home
     }
   ]
 })

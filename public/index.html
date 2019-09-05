@@ -3,7 +3,10 @@
   <head>
     <meta charset="utf-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
-    <meta name="viewport" content="width=device-width,initial-scale=1.0">
+    <!-- <meta
+			name="viewport"
+			content="width=device-width, initial-scale=1, minimum-scale=1, maximum-scale=1, user-scalable=no"
+		/> -->
     <link rel="icon" href="<%= BASE_URL %>favicon.ico">
     <title>wanda</title>
   </head>
@@ -14,4 +17,38 @@
     <div id="app"></div>
     <!-- built files will be auto injected -->
   </body>
+  <script>
+    //动态匹配手机端视口
+    (function() {
+			if (/Android (\d+\.\d+)/.test(navigator.userAgent)) {
+				var version = parseFloat(RegExp.$1);
+				if (version > 2.3) {
+					var phoneScale = parseInt(window.screen.width) / 640;
+					if (/MZ-M571C/.test(navigator.userAgent)) {
+						document.write(
+							'<meta name="viewport" content="width=640, minimum-scale = 0.5, maximum-scale= 0.5">'
+						);
+					} else if (/M571C/.test(navigator.userAgent) && /LizhiFM/.test(navigator.userAgent)) {
+						document.write(
+							'<meta name="viewport" content="width=640, minimum-scale = 0.5, maximum-scale= 0.5">'
+						);
+					} else {
+						document.write(
+							'<meta name="viewport" content="width=640, minimum-scale = ' +
+								phoneScale +
+								', maximum-scale = ' +
+								phoneScale +
+								', target-densitydpi=device-dpi">'
+						);
+					}
+				} else {
+					document.write('<meta name="viewport" content="width=640, target-densitydpi=device-dpi">');
+				}
+			} else {
+				document.write(
+					'<meta name="viewport" content="width=640, user-scalable=no, target-densitydpi=device-dpi">'
+				);
+			}
+		})();
+  </script>
 </html>
